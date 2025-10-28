@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>N Clock</title>
+<style>
+  body { background:black; color:white; font-family:sans-serif; margin:0; display:flex; justify-content:center; align-items:center; height:100vh; }
+  #clock { font-size:100px; }
+  #ampm { position:absolute; top:20px; right:20px; font-size:24px; color:#888; }
+</style>
+</head>
+<body>
+<div id="clock"></div>
+<div id="ampm"></div>
+<script>
+const clock = document.getElementById('clock');
+const ampm = document.getElementById('ampm');
+const is12h = true; // 12時間表示
+function updateClock(){
+  const now = new Date();
+  let h = now.getHours();
+  let m = now.getMinutes();
+  let s = now.getSeconds();
+  let ampmText = h>=12?'PM':'AM';
+  if(is12h){ h = h%12||12; ampm.style.display='block'; ampm.innerText=ampmText; } else { ampm.style.display='none'; }
+  clock.innerText = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+</body>
+</html>
